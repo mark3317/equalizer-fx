@@ -1,15 +1,11 @@
 package GUI;
 
-
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.*;
 import javafx.stage.Stage;
 import player.AudioPlayer;
-
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
-import java.io.IOException;
 
 public class FXMLDocumentController {
 
@@ -17,7 +13,7 @@ public class FXMLDocumentController {
     private Thread playThread;
 
     @FXML
-    private void open() throws IOException, UnsupportedAudioFileException {
+    private void open() {
         //Выбор файлов формата wav
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
@@ -29,7 +25,7 @@ public class FXMLDocumentController {
 
         this.audioPlayer = new AudioPlayer(selectedFile);
         playThread = new Thread(()->{
-                this.audioPlayer.play();
+        	this.audioPlayer.play();
         });
         playThread.start();
 
@@ -39,21 +35,27 @@ public class FXMLDocumentController {
     @FXML
     private void play() {
         if (this.audioPlayer != null){
-                this.audioPlayer.play();
+            if (this.audioPlayer.getStopStatus()) {
+                playThread = new Thread(() -> {
+                    this.audioPlayer.play();
+                });
+                playThread.start();
+            }
+            else
+                this.audioPlayer.setPauseStatus(false);
         }
     }
 
     @FXML
     private void pause() {
-        if (this.audioPlayer != null) {
-            this.audioPlayer.pause();
-        }
+        if (this.audioPlayer != null)
+            this.audioPlayer.setPauseStatus(true);
     }
 
     @FXML
     private void stop() {
         if (this.audioPlayer != null)
-            this.audioPlayer.stop();
+            this.audioPlayer.setStopStatus(true);
     }
 
     @FXML
