@@ -12,7 +12,7 @@
         <Button fx:id="button_select" layoutX="2.0" layoutY="27.0" onAction="#open" prefHeight="40.0" prefWidth="69.0" text="Оpen" />
         <Button fx:id="buttonClose" layoutX="96.0" layoutY="27.0" maxWidth="110" onAction="#clickClose" prefHeight="40.0" prefWidth="69.0" text="Close" />
 
-        <CheckBox layoutX="5.0" layoutY="106.0" onAction="#filterBox" text="FIR LPF" textFill="#fefefe" />
+        <CheckBox layoutX="5.0" layoutY="106.0" onAction="#filterBox" text="IIR LPF" textFill="#fefefe" />
 
         <Label layoutX="5" layoutY="85" text="Control panel" textFill="#fefefe" />
         <Button fx:id="button_play" layoutX="2.0" layoutY="130.0" onAction="#play" prefHeight="40.0" prefWidth="60.0" text="Play" />

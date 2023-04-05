@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application 2">
-      <change afterPath="$PROJECT_DIR$/src/equalizer/Filter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" afterDir="false" />
+    <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application 3_FIR">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocument.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocumentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocumentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Equalizer/player/AudioPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/player/AudioPlayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equalizer/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/player/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/AudioPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679927510478</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="application 3_FIR">
+      <created>1680678266634</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680678266634</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -104,7 +112,8 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="application 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="application 1" />
+    <MESSAGE value="application 3_FIR" />
+    <option name="LAST_COMMIT_MESSAGE" value="application 3_FIR" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

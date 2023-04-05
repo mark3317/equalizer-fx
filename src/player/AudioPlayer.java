@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class AudioPlayer {
+    private final File currentMusicFile;
+    private AudioInputStream audioStream;
     private SourceDataLine sourceDataLine;
     public static final int BUFF_SIZE = 30000;
     private final byte[] bufferBytes  = new byte[BUFF_SIZE];
-    private short[] sampleBuff = new short[BUFF_SIZE / 2];
+    private short[] bufferShort = new short[BUFF_SIZE / 2];
     private final Filter filter;
     private boolean isFilter;
-    private AudioInputStream audioStream;
     private boolean pauseStatus;
-    private final File currentMusicFile;
     private boolean stopStatus;
 
     public AudioPlayer(File musicFile) {
@@ -37,14 +37,18 @@ public class AudioPlayer {
             this.stopStatus = false;
 
             while ((this.audioStream.read(this.bufferBytes) != -1)) {
-                this.ByteArrayToSamplesArray();
+                this.ByteArrayToShortArray();
+
                 if (this.pauseStatus)
                     this.pause();
+
                 if (this.stopStatus)
                     break;
+
                 if(this.isFilter)
-                    this.sampleBuff = this.filter.filtering(this.sampleBuff);
-                this.SampleArrayToByteArray();
+                    this.bufferShort = this.filter.filtering(this.bufferShort);
+
+                this.ShortArrayToByteArray();
                 this.sourceDataLine.write(this.bufferBytes, 0, this.bufferBytes.length);
             }
             this.sourceDataLine.drain();
@@ -87,17 +91,17 @@ public class AudioPlayer {
             this.sourceDataLine.close();
     }
 
-    private void ByteArrayToSamplesArray() {
+    private void ByteArrayToShortArray() {
         for (int i = 0, j = 0; i < this.bufferBytes.length; i += 2, j++) {
-            this.sampleBuff[j] = (short) ((ByteBuffer.wrap(this.bufferBytes, i, 2).order(
+            this.bufferShort[j] = (short) ((ByteBuffer.wrap(this.bufferBytes, i, 2).order(
                     java.nio.ByteOrder.LITTLE_ENDIAN).getShort() / 2));
         }
     }
 
-    private void SampleArrayToByteArray() {
-        for (int i = 0, j = 0; i < this.sampleBuff.length && j < this.bufferBytes.length; i++, j += 2) {
-            this.bufferBytes[j] = (byte) (this.sampleBuff[i]);
-            this.bufferBytes[j + 1] = (byte) (this.sampleBuff[i] >>> 8);
+    private void ShortArrayToByteArray() {
+        for (int i = 0, j = 0; i < this.bufferShort.length && j < this.bufferBytes.length; i++, j += 2) {
+            this.bufferBytes[j] = (byte) (this.bufferShort[i]);
+            this.bufferBytes[j + 1] = (byte) (this.bufferShort[i] >>> 8);
         }
     }
 
