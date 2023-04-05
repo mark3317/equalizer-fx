@@ -6,6 +6,7 @@ import javafx.stage.FileChooser.*;
 import javafx.stage.Stage;
 import player.AudioPlayer;
 import java.io.File;
+import java.io.IOException;
 
 public class FXMLDocumentController {
 
@@ -28,12 +29,11 @@ public class FXMLDocumentController {
         	this.audioPlayer.play();
         });
         playThread.start();
-
-        System.out.println("PLAY");
     }
 
     @FXML
     private void play() {
+        System.out.println("PLAY");
         if (this.audioPlayer != null){
             if (this.audioPlayer.getStopStatus()) {
                 playThread = new Thread(() -> {
@@ -48,12 +48,14 @@ public class FXMLDocumentController {
 
     @FXML
     private void pause() {
+        System.out.println("PAUSE");
         if (this.audioPlayer != null)
             this.audioPlayer.setPauseStatus(true);
     }
 
     @FXML
     private void stop() {
+        System.out.println("STOP");
         if (this.audioPlayer != null)
             this.audioPlayer.setStopStatus(true);
     }
@@ -67,5 +69,13 @@ public class FXMLDocumentController {
     	}
 
     	System.exit(0);
+    }
+
+    @FXML
+    private void filterBox() {
+        System.out.println("FIR LPF");
+        if(!this.audioPlayer.filterIsActive())
+            this.audioPlayer.setFilter(true);
+        else this.audioPlayer.setFilter(false);
     }
 }

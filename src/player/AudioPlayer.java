@@ -1,5 +1,7 @@
 package player;
 
+import equalizer.Filter;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -7,9 +9,11 @@ import java.nio.ByteBuffer;
 
 public class AudioPlayer {
     private SourceDataLine sourceDataLine;
-    public static final int BUFF_SIZE = 16000;
+    public static final int BUFF_SIZE = 30000;
     private final byte[] bufferBytes  = new byte[BUFF_SIZE];
-    private final short[] sampleBuff = new short[BUFF_SIZE / 2];
+    private short[] sampleBuff = new short[BUFF_SIZE / 2];
+    private final Filter filter;
+    private boolean isFilter;
     private AudioInputStream audioStream;
     private boolean pauseStatus;
     private final File currentMusicFile;
@@ -17,6 +21,8 @@ public class AudioPlayer {
 
     public AudioPlayer(File musicFile) {
         this.currentMusicFile = musicFile;
+        this.filter = new Filter();
+        this.isFilter = false;
     }
 
 
@@ -25,7 +31,7 @@ public class AudioPlayer {
             this.audioStream = AudioSystem.getAudioInputStream(currentMusicFile);
             AudioFormat audioFormat = audioStream.getFormat();
             this.sourceDataLine = AudioSystem.getSourceDataLine(audioFormat);
-            this.sourceDataLine.open(audioFormat, BUFF_SIZE);
+            this.sourceDataLine.open(audioFormat);
             this.sourceDataLine.start();
             this.pauseStatus = false;
             this.stopStatus = false;
@@ -36,7 +42,9 @@ public class AudioPlayer {
                     this.pause();
                 if (this.stopStatus)
                     break;
-                this.SampleArrayByteArray();
+                if(this.isFilter)
+                    this.sampleBuff = this.filter.filtering(this.sampleBuff);
+                this.SampleArrayToByteArray();
                 this.sourceDataLine.write(this.bufferBytes, 0, this.bufferBytes.length);
             }
             this.sourceDataLine.drain();
@@ -80,16 +88,25 @@ public class AudioPlayer {
     }
 
     private void ByteArrayToSamplesArray() {
-        for (int i = 0, j = 0; i < this.bufferBytes.length - (32000/BUFF_SIZE - 1); i += 2, j++) {
+        for (int i = 0, j = 0; i < this.bufferBytes.length; i += 2, j++) {
             this.sampleBuff[j] = (short) ((ByteBuffer.wrap(this.bufferBytes, i, 2).order(
                     java.nio.ByteOrder.LITTLE_ENDIAN).getShort() / 2));
         }
     }
 
-    private void SampleArrayByteArray() {
-        for (int i = 0, j = 0; i < this.sampleBuff.length && j < (this.bufferBytes.length - (32000/BUFF_SIZE - 1)); i++, j += 2) {
+    private void SampleArrayToByteArray() {
+        for (int i = 0, j = 0; i < this.sampleBuff.length && j < this.bufferBytes.length; i++, j += 2) {
             this.bufferBytes[j] = (byte) (this.sampleBuff[i]);
             this.bufferBytes[j + 1] = (byte) (this.sampleBuff[i] >>> 8);
         }
     }
+
+    public boolean filterIsActive() {
+        return this.isFilter;
+    }
+
+    public void setFilter(boolean b) {
+        this.isFilter = b;
+    }
+
 }
