@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application 5_FIR">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equalizer/Equalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Equalizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/equalizer/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Filter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/player/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/AudioPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +20,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,7 +35,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/markn/IdeaProjects/Equalizer",
+    "last_opened_file_path": "C:/Users/markn/Desktop/NIRS/Версии/Equalizer_app3_bih",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.20114942",
@@ -82,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679927510478</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="application 5_FIR">
+      <created>1681211386253</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681211386253</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +145,8 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="application 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="application 1" />
+    <MESSAGE value="application 5_FIR" />
+    <option name="LAST_COMMIT_MESSAGE" value="application 5_FIR" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
