@@ -5,19 +5,62 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import javafx.scene.control.CheckBox?>
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="300" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Slider?>
+<AnchorPane id="AnchorPane" prefHeight="300" prefWidth="800" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
     <children>
 
         <Label layoutX="5" layoutY="5" text="Choose file *.wav " textFill="#fcfcfc" />
         <Button fx:id="button_select" layoutX="2.0" layoutY="27.0" onAction="#open" prefHeight="40.0" prefWidth="69.0" text="Оpen" />
         <Button fx:id="buttonClose" layoutX="96.0" layoutY="27.0" maxWidth="110" onAction="#clickClose" prefHeight="40.0" prefWidth="69.0" text="Close" />
 
-        <CheckBox layoutX="5.0" layoutY="106.0" onAction="#filterBox" text="IIR LPF" textFill="#fefefe" />
+        <Label layoutX="5" layoutY="145" text="Volume: " textFill="#fefefe" />
+        <Slider fx:id="soundSlider" layoutX="5" layoutY="160" max="1.5" min="0" orientation="HORIZONTAL" prefHeight="25.0" prefWidth="155.0" rotate="0" value="0.5">
+        </Slider>
 
-        <Label layoutX="5" layoutY="85" text="Control panel" textFill="#fefefe" />
-        <Button fx:id="button_play" layoutX="2.0" layoutY="130.0" onAction="#play" prefHeight="40.0" prefWidth="60.0" text="Play" />
-        <Button fx:id="button_pause" layoutX="70.0" layoutY="130.0" onAction="#pause" prefHeight="40.0" prefWidth="60.0" text="Pause" />
-        <Button fx:id="button_stop" layoutX="138.0" layoutY="130.0" onAction="#stop" prefHeight="40.0" prefWidth="60.0" text="Reset" />
+        <Label layoutX="203.0" layoutY="75.0" text="Choose gain factor: " textFill="#fefefe" />
+        <HBox layoutX="203.0" layoutY="105.0" prefHeight="40" prefWidth="960">
+            <children>
+                <Label prefWidth="120" text="0-86 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="86-259 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="259-604 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="604-1294 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="1294-2675 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="2675-5435 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="5435-10957 Hz" textFill="#fefefe" />
+                <Label prefWidth="120" text="10957-22000 Hz" textFill="#fefefe" />
+            </children>
+        </HBox>
+        <HBox layoutX="203.0" layoutY="115.0" prefHeight="150" prefWidth="960">
+            <children>
+                <Slider fx:id="Slider0" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider1" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider2" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider3" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider4" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider5" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider6" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+                <Slider fx:id="Slider7" max="1" min="0.00025" orientation="VERTICAL" prefWidth="120" showTickLabels="true" showTickMarks="true" />
+            </children>
+        </HBox>
+        <HBox layoutX="203.0" layoutY="265.0" prefHeight="50" prefWidth="960">
+            <children>
+                <Label fx:id="Label0" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label1" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label2" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label3" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label4" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label5" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label6" prefWidth="120" textFill="WHITE" />
+                <Label fx:id="Label7" prefWidth="120" textFill="WHITE" />
+            </children>
+
+        </HBox>
+
+        <Label layoutX="5" layoutY="120" text="Control panel" textFill="#fefefe" />
+        <Button fx:id="button_play" layoutX="2.0" layoutY="200.0" onAction="#play" prefHeight="40.0" prefWidth="60.0" text="Play" />
+        <Button fx:id="button_pause" layoutX="70.0" layoutY="200.0" onAction="#pause" prefHeight="40.0" prefWidth="60.0" text="Pause" />
+        <Button fx:id="button_stop" layoutX="138.0" layoutY="200.0" onAction="#stop" prefHeight="40.0" prefWidth="60.0" text="Reset" />
 
     </children>
 </AnchorPane>

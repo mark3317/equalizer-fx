@@ -1,16 +1,17 @@
 package equalizer;
 
-public class Filter {
-    protected short[] inputSignal;
-    protected short[] outputSignal;
+import java.util.concurrent.Callable;
 
-    public Filter(){
-    }
-    public short[] filtering(final short[] inputSignal) {
+public class Filter implements Callable<short[]> {
+    private short[] inputSignal;
+    private short[] outputSignal;
+    private double gain;
+    private double[] coffsNumFilter;
+
+    public void settings(final short[] inputSignal, final double[] coffsNumFilter) {
         this.inputSignal = inputSignal;
+        this.coffsNumFilter = coffsNumFilter;
         this.outputSignal = new short[inputSignal.length];
-        this.convolution();
-        return this.outputSignal;
     }
 
     private void convolution() {
@@ -19,9 +20,19 @@ public class Filter {
             tmp = 0;
             for(int j = 0; j < FilterInfo.COUNT_OF_COFFS; j++) {
                 if(i - j >= 0)
-                    tmp += FilterInfo.COFFS_NUM[j] * this.inputSignal[i - j];
+                    tmp += coffsNumFilter[j] * this.inputSignal[i - j];
             }
-            this.outputSignal[i] += (short)(tmp);
+            this.outputSignal[i] += this.gain * (short)(tmp / 4); //делим на 4, чтобы не было перегруза на пересечении фильтров
         }
+    }
+
+    public void setGain(double gain) {
+        this.gain = gain;
+    }
+
+    @Override
+    public short[] call() {
+        this.convolution();
+        return this.outputSignal;
     }
 }

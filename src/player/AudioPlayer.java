@@ -1,11 +1,13 @@
 package player;
 
+import equalizer.Equalizer;
 import equalizer.Filter;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.concurrent.ExecutionException;
 
 public class AudioPlayer {
     private final File currentMusicFile;
@@ -14,15 +16,15 @@ public class AudioPlayer {
     public static final int BUFF_SIZE = 30000;
     private final byte[] bufferBytes  = new byte[BUFF_SIZE];
     private short[] bufferShort = new short[BUFF_SIZE / 2];
-    private final Filter filter;
-    private boolean isFilter;
     private boolean pauseStatus;
     private boolean stopStatus;
+    private double gain;
+    private final Equalizer equalizer;
 
     public AudioPlayer(File musicFile) {
         this.currentMusicFile = musicFile;
-        this.filter = new Filter();
-        this.isFilter = false;
+        this.equalizer = new Equalizer();
+        this.gain = 1.0;
     }
 
 
@@ -45,8 +47,9 @@ public class AudioPlayer {
                 if (this.stopStatus)
                     break;
 
-                if(this.isFilter)
-                    this.bufferShort = this.filter.filtering(this.bufferShort);
+                equalizer.setInputSignal(this.bufferShort);
+                this.equalizer.equalization();
+                this.bufferShort = equalizer.getOutputSignal();
 
                 this.ShortArrayToByteArray();
                 this.sourceDataLine.write(this.bufferBytes, 0, this.bufferBytes.length);
@@ -54,6 +57,8 @@ public class AudioPlayer {
             this.sourceDataLine.drain();
             this.sourceDataLine.close();
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -94,7 +99,7 @@ public class AudioPlayer {
     private void ByteArrayToShortArray() {
         for (int i = 0, j = 0; i < this.bufferBytes.length; i += 2, j++) {
             this.bufferShort[j] = (short) ((ByteBuffer.wrap(this.bufferBytes, i, 2).order(
-                    java.nio.ByteOrder.LITTLE_ENDIAN).getShort() / 2));
+                    java.nio.ByteOrder.LITTLE_ENDIAN).getShort() / 2) * this.gain);
         }
     }
 
@@ -105,12 +110,12 @@ public class AudioPlayer {
         }
     }
 
-    public boolean filterIsActive() {
-        return this.isFilter;
+    public void setGain(double gain) {
+        this.gain = gain;
     }
 
-    public void setFilter(boolean b) {
-        this.isFilter = b;
+    public Equalizer getEqualizer() {
+        return this.equalizer;
     }
 
 }
