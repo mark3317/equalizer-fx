@@ -1,0 +1,326 @@
+Index: src/equalizer/Equalizer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package equalizer;\r\nimport java.util.concurrent.ExecutionException;\r\nimport java.util.concurrent.ExecutorService;\r\nimport java.util.concurrent.Executors;\r\nimport java.util.concurrent.Future;\r\n\r\npublic class Equalizer {\r\n    private short[]outputSignal;\r\n    private Filter[] filters;\r\n    private final static char COUNT_OF_THREADS = 4;\r\n    ExecutorService pool;\r\n\r\n    public Equalizer() {\r\n        pool = Executors.newFixedThreadPool(COUNT_OF_THREADS);\r\n        this.createFilters();\r\n    }\r\n\r\n    public void setInputSignal(short[] inputSignal) {\r\n        this.outputSignal = new short[inputSignal.length];\r\n        this.filters[0].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_0);\r\n        this.filters[1].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_1);\r\n        this.filters[2].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_2);\r\n        this.filters[3].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_3);\r\n        this.filters[4].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_4);\r\n        this.filters[5].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_5);\r\n        this.filters[6].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_6);\r\n        this.filters[7].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_7);\r\n\r\n    }\r\n\r\n\r\n    private void createFilters() {\r\n        this.filters = new  Filter [FilterInfo.COUNT_OF_BANDS] ;\r\n        for (int i = 0; i < FilterInfo.COUNT_OF_BANDS; i++)\r\n            this.filters[i] = new Filter();\r\n    }\r\n\r\n    public void equalization( ) throws InterruptedException, ExecutionException {\r\n        Future<short[]>[] fs = new Future[FilterInfo.COUNT_OF_BANDS];\r\n        for(int i = 0; i < FilterInfo.COUNT_OF_BANDS; i++){\r\n            fs[i] = pool.submit(this.filters[i]);\r\n        }\r\n\r\n        for(int i = 0; i < this.outputSignal.length; i++) {\r\n            this.outputSignal[i] += fs[0].get()[i] +\r\n                    fs[1].get()[i] +\r\n                    fs[2].get()[i] +\r\n                    fs[3].get()[i] +\r\n                    fs[4].get()[i] +\r\n                    fs[5].get()[i] +\r\n                    fs[6].get()[i] +\r\n                    fs[7].get()[i];\r\n        }\r\n    }\r\n    public short[] getOutputSignal() {\r\n        return this.outputSignal;\r\n    }\r\n    public Filter getFilter(int numberFilter) {\r\n        return this.filters[numberFilter];\r\n    }\r\n    public void close() {\r\n        if(this.pool != null) {\r\n            this.pool.shutdown();\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/equalizer/Equalizer.java b/src/equalizer/Equalizer.java
+--- a/src/equalizer/Equalizer.java	(revision 421319f1b7d6524892e987c269e53520021a6275)
++++ b/src/equalizer/Equalizer.java	(date 1681214352311)
+@@ -17,14 +17,14 @@
+ 
+     public void setInputSignal(short[] inputSignal) {
+         this.outputSignal = new short[inputSignal.length];
+-        this.filters[0].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_0);
+-        this.filters[1].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_1);
+-        this.filters[2].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_2);
+-        this.filters[3].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_3);
+-        this.filters[4].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_4);
+-        this.filters[5].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_5);
+-        this.filters[6].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_6);
+-        this.filters[7].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_7);
++        this.filters[0].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_0, FilterInfo.COFFS_DEN_OF_BAND_0);
++        this.filters[1].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_1, FilterInfo.COFFS_DEN_OF_BAND_1);
++        this.filters[2].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_2, FilterInfo.COFFS_DEN_OF_BAND_2);
++        this.filters[3].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_3, FilterInfo.COFFS_DEN_OF_BAND_3);
++        this.filters[4].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_4, FilterInfo.COFFS_DEN_OF_BAND_4);
++        this.filters[5].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_5, FilterInfo.COFFS_DEN_OF_BAND_5);
++        this.filters[6].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_6, FilterInfo.COFFS_DEN_OF_BAND_6);
++        this.filters[7].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_7, FilterInfo.COFFS_DEN_OF_BAND_7);
+ 
+     }
+ 
+Index: src/equalizer/FilterInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package equalizer;\r\n\r\npublic final class FilterInfo {\r\n    public final static short COUNT_OF_COFFS = 51;\r\n    public static final int COUNT_OF_BANDS = 8;\r\n    public static final double[] COFFS_NUM_OF_BAND_0 =  {\r\n            0.01943876378151,  0.01945899524609,  0.01947841276932,  0.01949701487675,\r\n            0.01951480015567,  0.01953176725527,  0.01954791488673,  0.01956324182338,\r\n            0.01957774690078,  0.01959142901683,  0.01960428713187,  0.01961632026878,\r\n            0.01962752751308,  0.01963790801298,  0.01964746097948,  0.01965618568644,\r\n            0.01966408147064,  0.01967114773185,  0.01967738393286,  0.01968278959956,\r\n            0.01968736432096,  0.01969110774925,   0.0196940195998,   0.0196960996512,\r\n            0.01969734774532,  0.01969776378723,  0.01969734774532,   0.0196960996512,\r\n            0.0196940195998,  0.01969110774925,  0.01968736432096,  0.01968278959956,\r\n            0.01967738393286,  0.01967114773185,  0.01966408147064,  0.01965618568644,\r\n            0.01964746097948,  0.01963790801298,  0.01962752751308,  0.01961632026878,\r\n            0.01960428713187,  0.01959142901683,  0.01957774690078,  0.01956324182338,\r\n            0.01954791488673,  0.01953176725527,  0.01951480015567,  0.01949701487675,\r\n            0.01947841276932,  0.01945899524609,  0.01943876378151\r\n            };\r\n    public static final double[] COFFS_NUM_OF_BAND_1 =  {\r\n            0.01803952009263,  0.01836743350072,  0.01868413406108,  0.01898935955539,\r\n            0.01928285699345,  0.01956438285652,  0.01983370333158,  0.02009059453647,\r\n            0.02033484273557,  0.02056624454582,  0.02078460713285,  0.02098974839708,\r\n            0.02118149714948,  0.02135969327689,  0.02152418789675,  0.02167484350093,\r\n            0.02181153408874,  0.02193414528875,  0.02204257446942,  0.02213673083846,\r\n            0.02221653553064,  0.02228192168418,  0.02233283450548,  0.02236923132215,\r\n            0.02239108162436,  0.02239836709439,  0.02239108162436,  0.02236923132215,\r\n            0.02233283450548,  0.02228192168418,  0.02221653553064,  0.02213673083846,\r\n            0.02204257446942,  0.02193414528875,  0.02181153408874,  0.02167484350093,\r\n            0.02152418789675,  0.02135969327689,  0.02118149714948,  0.02098974839708,\r\n            0.02078460713285,  0.02056624454582,  0.02033484273557,  0.02009059453647,\r\n            0.01983370333158,  0.01956438285652,  0.01928285699345,  0.01898935955539,\r\n            0.01868413406108,  0.01836743350072,  0.01803952009263\r\n    };\r\n    public static final double[] COFFS_NUM_OF_BAND_2 =  {\r\n            0.001446315110199, 0.003721199165323, 0.006003650567247, 0.008283628313235,\r\n            0.01055102792033,  0.01279573273349,  0.01500766555591,   0.0171768403142,\r\n            0.01929341346938,  0.02134773488583,  0.02333039787217,  0.02523228811222,\r\n            0.02704463120973,  0.02875903857804,  0.03036755141442,  0.03186268250963,\r\n            0.03323745565494,  0.03448544242225,  0.03560079610777,  0.03657828264563,\r\n            0.03741330831474,  0.03810194408066,  0.03864094643331,  0.03902777460115,\r\n            0.03926060404335,  0.03933833614264,  0.03926060404335,  0.03902777460115,\r\n            0.03864094643331,  0.03810194408066,  0.03741330831474,  0.03657828264563,\r\n            0.03560079610777,  0.03448544242225,  0.03323745565494,  0.03186268250963,\r\n            0.03036755141442,  0.02875903857804,  0.02704463120973,  0.02523228811222,\r\n            0.02333039787217,  0.02134773488583,  0.01929341346938,   0.0171768403142,\r\n            0.01500766555591,  0.01279573273349,  0.01055102792033, 0.008283628313235,\r\n            0.006003650567247, 0.003721199165323, 0.001446315110199\r\n    };\r\n    public static final double[] COFFS_NUM_OF_BAND_3 =  {\r\n            -0.03019510156576, -0.03154297393754, -0.03231583282805, -0.03247453245266,\r\n            -0.03199312942531, -0.03085987765073, -0.02907787932434, -0.02666536875406,\r\n            -0.02365561534939, -0.02009644224451, -0.01604936735449, -0.01158838391863,\r\n            -0.006798407474519,-0.001773425450496, 0.003385606100304, 0.008573066913874,\r\n            0.01368112053595,  0.01860224410467,  0.02323177540365,  0.02747041178575,\r\n            0.03122659643236,   0.0344187300347,  0.03697715029565,  0.03884582754162,\r\n            0.03998373204269,  0.04036583717072,  0.03998373204269,  0.03884582754162,\r\n            0.03697715029565,   0.0344187300347,  0.03122659643236,  0.02747041178575,\r\n            0.02323177540365,  0.01860224410467,  0.01368112053595, 0.008573066913874,\r\n            0.003385606100304,-0.001773425450496,-0.006798407474519, -0.01158838391863,\r\n            -0.01604936735449, -0.02009644224451, -0.02365561534939, -0.02666536875406,\r\n            -0.02907787932434, -0.03085987765073, -0.03199312942531, -0.03247453245266,\r\n            -0.03231583282805, -0.03154297393754, -0.03019510156576\r\n    };\r\n    public static final double[] COFFS_NUM_OF_BAND_4 =  {\r\n            0.01011937395208,  0.01439128191507,  0.01813430399031,  0.02071624143677,\r\n            0.02156630012109,  0.02025608877576,  0.01656909682959,  0.01054911770236,\r\n            0.002520226167224,-0.006925916602012, -0.01697582973883, -0.02666941674649,\r\n            -0.03499722644269, -0.04100940498932, -0.04392414000698, -0.04322297557825,\r\n            -0.03872145694112, -0.03060605450528, -0.01943195233258,-0.006080655144101,\r\n            0.008319037907659,  0.02249886915579,  0.03517650195813,  0.04518498857231,\r\n            0.05159220996249,  0.05379713237556,  0.05159220996249,  0.04518498857231,\r\n            0.03517650195813,  0.02249886915579, 0.008319037907659,-0.006080655144101,\r\n            -0.01943195233258, -0.03060605450528, -0.03872145694112, -0.04322297557825,\r\n            -0.04392414000698, -0.04100940498932, -0.03499722644269, -0.02666941674649,\r\n            -0.01697582973883,-0.006925916602012, 0.002520226167224,  0.01054911770236,\r\n            0.01656909682959,  0.02025608877576,  0.02156630012109,  0.02071624143677,\r\n            0.01813430399031,  0.01439128191507,  0.01011937395208\r\n    };\r\n    public static final double[] COFFS_NUM_OF_BAND_5 =  {\r\n            0.006392786130915,-0.008191326635247, -0.02097140008325,  -0.0263623714863,\r\n            -0.02221439864862, -0.01109230365858,0.0009849468395183, 0.007818239082701,\r\n            0.006607918765308,-0.0001873757447449,-0.005946760545058,-0.003616441490629,\r\n            0.009773146627988,  0.03029835162105,  0.04788006494434,  0.05067870326714,\r\n            0.03128822852968, -0.00831395578956,  -0.0558144804206, -0.09262304292127,\r\n            -0.1015440887726, -0.07474597541538, -0.01828473964474,  0.04919743596848,\r\n            0.1033955000926,   0.1240725445202,   0.1033955000926,  0.04919743596848,\r\n            -0.01828473964474, -0.07474597541538,  -0.1015440887726, -0.09262304292127,\r\n            -0.0558144804206, -0.00831395578956,  0.03128822852968,  0.05067870326714,\r\n            0.04788006494434,  0.03029835162105, 0.009773146627988,-0.003616441490629,\r\n            -0.005946760545058,-0.0001873757447449, 0.006607918765308, 0.007818239082701,\r\n            0.0009849468395183, -0.01109230365858, -0.02221439864862,  -0.0263623714863,\r\n            -0.02097140008325,-0.008191326635247, 0.006392786130915\r\n    };\r\n    public static final double[] COFFS_NUM_OF_BAND_6 =  {\r\n            0.006031624465459,-0.0003448890509703,-0.0007167684326402,  0.01747553870618,\r\n            0.02062068920473,-0.008381252202414, -0.02898308890566, -0.01190072307188,\r\n            0.007826845326762,-0.0003563149319141,-0.002843283124005,  0.02557664391618,\r\n            0.03610546808461,-0.008452993510474, -0.04913725230113, -0.02549732327631,\r\n            0.0125714831322,-0.0003632289981419,-0.009668203803637,  0.05456664642108,\r\n            0.09992448098266,-0.008489002638843,  -0.1744758837006,   -0.146437105964,\r\n            0.09126773314918,   0.2367001549351,  0.09126773314918,   -0.146437105964,\r\n            -0.1744758837006,-0.008489002638843,  0.09992448098266,  0.05456664642108,\r\n            -0.009668203803637,-0.0003632289981419,   0.0125714831322, -0.02549732327631,\r\n            -0.04913725230113,-0.008452993510474,  0.03610546808461,  0.02557664391618,\r\n            -0.002843283124005,-0.0003563149319141, 0.007826845326762, -0.01190072307188,\r\n            -0.02898308890566,-0.008381252202414,  0.02062068920473,  0.01747553870618,\r\n            -0.0007167684326402,-0.0003448890509703, 0.006031624465459\r\n    };\r\n    public static final double[] COFFS_NUM_OF_BAND_7 =  {\r\n            0.01198100823448,-0.003268358623724, -0.01398214346754,-0.0005462428656256,\r\n            0.01515281011823, 0.005076223603252, -0.01524483130827, -0.01016660613479,\r\n            0.01401041852182,  0.01562464630208, -0.01119051246281, -0.02122928826543,\r\n            0.006481325827823,  0.02674252122337, 0.000546337243949, -0.03192198190268,\r\n            -0.01064457361028,  0.03653405965791,  0.02543039387013, -0.04036672047101,\r\n            -0.04922797036847,  0.04324127532084,  0.09826406035481, -0.04502237706091,\r\n            -0.3201203368008,   0.5535176707396,  -0.3201203368008, -0.04502237706091,\r\n            0.09826406035481,  0.04324127532084, -0.04922797036847, -0.04036672047101,\r\n            0.02543039387013,  0.03653405965791, -0.01064457361028, -0.03192198190268,\r\n            0.000546337243949,  0.02674252122337, 0.006481325827823, -0.02122928826543,\r\n            -0.01119051246281,  0.01562464630208,  0.01401041852182, -0.01016660613479,\r\n            -0.01524483130827, 0.005076223603252,  0.01515281011823,-0.0005462428656256,\r\n            -0.01398214346754,-0.003268358623724,  0.01198100823448\r\n    };\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/equalizer/FilterInfo.java b/src/equalizer/FilterInfo.java
+--- a/src/equalizer/FilterInfo.java	(revision 421319f1b7d6524892e987c269e53520021a6275)
++++ b/src/equalizer/FilterInfo.java	(date 1681214352311)
+@@ -1,126 +1,64 @@
+ package equalizer;
+ 
+ public final class FilterInfo {
+-    public final static short COUNT_OF_COFFS = 51;
++    public final static short COUNT_OF_COFFS = 5;
+     public static final int COUNT_OF_BANDS = 8;
+     public static final double[] COFFS_NUM_OF_BAND_0 =  {
+-            0.01943876378151,  0.01945899524609,  0.01947841276932,  0.01949701487675,
+-            0.01951480015567,  0.01953176725527,  0.01954791488673,  0.01956324182338,
+-            0.01957774690078,  0.01959142901683,  0.01960428713187,  0.01961632026878,
+-            0.01962752751308,  0.01963790801298,  0.01964746097948,  0.01965618568644,
+-            0.01966408147064,  0.01967114773185,  0.01967738393286,  0.01968278959956,
+-            0.01968736432096,  0.01969110774925,   0.0196940195998,   0.0196960996512,
+-            0.01969734774532,  0.01969776378723,  0.01969734774532,   0.0196960996512,
+-            0.0196940195998,  0.01969110774925,  0.01968736432096,  0.01968278959956,
+-            0.01967738393286,  0.01967114773185,  0.01966408147064,  0.01965618568644,
+-            0.01964746097948,  0.01963790801298,  0.01962752751308,  0.01961632026878,
+-            0.01960428713187,  0.01959142901683,  0.01957774690078,  0.01956324182338,
+-            0.01954791488673,  0.01953176725527,  0.01951480015567,  0.01949701487675,
+-            0.01947841276932,  0.01945899524609,  0.01943876378151
++            9.891424636162e-10,3.956569854465e-09,5.934854781697e-09,3.956569854465e-09,
++            9.891424636162e-10
+             };
+     public static final double[] COFFS_NUM_OF_BAND_1 =  {
+-            0.01803952009263,  0.01836743350072,  0.01868413406108,  0.01898935955539,
+-            0.01928285699345,  0.01956438285652,  0.01983370333158,  0.02009059453647,
+-            0.02033484273557,  0.02056624454582,  0.02078460713285,  0.02098974839708,
+-            0.02118149714948,  0.02135969327689,  0.02152418789675,  0.02167484350093,
+-            0.02181153408874,  0.02193414528875,  0.02204257446942,  0.02213673083846,
+-            0.02221653553064,  0.02228192168418,  0.02233283450548,  0.02236923132215,
+-            0.02239108162436,  0.02239836709439,  0.02239108162436,  0.02236923132215,
+-            0.02233283450548,  0.02228192168418,  0.02221653553064,  0.02213673083846,
+-            0.02204257446942,  0.02193414528875,  0.02181153408874,  0.02167484350093,
+-            0.02152418789675,  0.02135969327689,  0.02118149714948,  0.02098974839708,
+-            0.02078460713285,  0.02056624454582,  0.02033484273557,  0.02009059453647,
+-            0.01983370333158,  0.01956438285652,  0.01928285699345,  0.01898935955539,
+-            0.01868413406108,  0.01836743350072,  0.01803952009263
++            0.0001475697567821, 0, -0.0002951395135641, 0, 0.0001475697567821
+     };
+     public static final double[] COFFS_NUM_OF_BAND_2 =  {
+-            0.001446315110199, 0.003721199165323, 0.006003650567247, 0.008283628313235,
+-            0.01055102792033,  0.01279573273349,  0.01500766555591,   0.0171768403142,
+-            0.01929341346938,  0.02134773488583,  0.02333039787217,  0.02523228811222,
+-            0.02704463120973,  0.02875903857804,  0.03036755141442,  0.03186268250963,
+-            0.03323745565494,  0.03448544242225,  0.03560079610777,  0.03657828264563,
+-            0.03741330831474,  0.03810194408066,  0.03864094643331,  0.03902777460115,
+-            0.03926060404335,  0.03933833614264,  0.03926060404335,  0.03902777460115,
+-            0.03864094643331,  0.03810194408066,  0.03741330831474,  0.03657828264563,
+-            0.03560079610777,  0.03448544242225,  0.03323745565494,  0.03186268250963,
+-            0.03036755141442,  0.02875903857804,  0.02704463120973,  0.02523228811222,
+-            0.02333039787217,  0.02134773488583,  0.01929341346938,   0.0171768403142,
+-            0.01500766555591,  0.01279573273349,  0.01055102792033, 0.008283628313235,
+-            0.006003650567247, 0.003721199165323, 0.001446315110199
++            0.0005803127939367, 0, -0.001160625587873, 0, 0.0005803127939367
+     };
+     public static final double[] COFFS_NUM_OF_BAND_3 =  {
+-            -0.03019510156576, -0.03154297393754, -0.03231583282805, -0.03247453245266,
+-            -0.03199312942531, -0.03085987765073, -0.02907787932434, -0.02666536875406,
+-            -0.02365561534939, -0.02009644224451, -0.01604936735449, -0.01158838391863,
+-            -0.006798407474519,-0.001773425450496, 0.003385606100304, 0.008573066913874,
+-            0.01368112053595,  0.01860224410467,  0.02323177540365,  0.02747041178575,
+-            0.03122659643236,   0.0344187300347,  0.03697715029565,  0.03884582754162,
+-            0.03998373204269,  0.04036583717072,  0.03998373204269,  0.03884582754162,
+-            0.03697715029565,   0.0344187300347,  0.03122659643236,  0.02747041178575,
+-            0.02323177540365,  0.01860224410467,  0.01368112053595, 0.008573066913874,
+-            0.003385606100304,-0.001773425450496,-0.006798407474519, -0.01158838391863,
+-            -0.01604936735449, -0.02009644224451, -0.02365561534939, -0.02666536875406,
+-            -0.02907787932434, -0.03085987765073, -0.03199312942531, -0.03247453245266,
+-            -0.03231583282805, -0.03154297393754, -0.03019510156576
++            0.002244873551245, 0, -0.00448974710249, 0, 0.002244873551245
+     };
+     public static final double[] COFFS_NUM_OF_BAND_4 =  {
+-            0.01011937395208,  0.01439128191507,  0.01813430399031,  0.02071624143677,
+-            0.02156630012109,  0.02025608877576,  0.01656909682959,  0.01054911770236,
+-            0.002520226167224,-0.006925916602012, -0.01697582973883, -0.02666941674649,
+-            -0.03499722644269, -0.04100940498932, -0.04392414000698, -0.04322297557825,
+-            -0.03872145694112, -0.03060605450528, -0.01943195233258,-0.006080655144101,
+-            0.008319037907659,  0.02249886915579,  0.03517650195813,  0.04518498857231,
+-            0.05159220996249,  0.05379713237556,  0.05159220996249,  0.04518498857231,
+-            0.03517650195813,  0.02249886915579, 0.008319037907659,-0.006080655144101,
+-            -0.01943195233258, -0.03060605450528, -0.03872145694112, -0.04322297557825,
+-            -0.04392414000698, -0.04100940498932, -0.03499722644269, -0.02666941674649,
+-            -0.01697582973883,-0.006925916602012, 0.002520226167224,  0.01054911770236,
+-            0.01656909682959,  0.02025608877576,  0.02156630012109,  0.02071624143677,
+-            0.01813430399031,  0.01439128191507,  0.01011937395208
++            0.008418313328188, 0, -0.01683662665638, 0, 0.008418313328188
+     };
+     public static final double[] COFFS_NUM_OF_BAND_5 =  {
+-            0.006392786130915,-0.008191326635247, -0.02097140008325,  -0.0263623714863,
+-            -0.02221439864862, -0.01109230365858,0.0009849468395183, 0.007818239082701,
+-            0.006607918765308,-0.0001873757447449,-0.005946760545058,-0.003616441490629,
+-            0.009773146627988,  0.03029835162105,  0.04788006494434,  0.05067870326714,
+-            0.03128822852968, -0.00831395578956,  -0.0558144804206, -0.09262304292127,
+-            -0.1015440887726, -0.07474597541538, -0.01828473964474,  0.04919743596848,
+-            0.1033955000926,   0.1240725445202,   0.1033955000926,  0.04919743596848,
+-            -0.01828473964474, -0.07474597541538,  -0.1015440887726, -0.09262304292127,
+-            -0.0558144804206, -0.00831395578956,  0.03128822852968,  0.05067870326714,
+-            0.04788006494434,  0.03029835162105, 0.009773146627988,-0.003616441490629,
+-            -0.005946760545058,-0.0001873757447449, 0.006607918765308, 0.007818239082701,
+-            0.0009849468395183, -0.01109230365858, -0.02221439864862,  -0.0263623714863,
+-            -0.02097140008325,-0.008191326635247, 0.006392786130915
++            0.02987276360811, 0, -0.05974552721623, 0, 0.02987276360811
+     };
+     public static final double[] COFFS_NUM_OF_BAND_6 =  {
+-            0.006031624465459,-0.0003448890509703,-0.0007167684326402,  0.01747553870618,
+-            0.02062068920473,-0.008381252202414, -0.02898308890566, -0.01190072307188,
+-            0.007826845326762,-0.0003563149319141,-0.002843283124005,  0.02557664391618,
+-            0.03610546808461,-0.008452993510474, -0.04913725230113, -0.02549732327631,
+-            0.0125714831322,-0.0003632289981419,-0.009668203803637,  0.05456664642108,
+-            0.09992448098266,-0.008489002638843,  -0.1744758837006,   -0.146437105964,
+-            0.09126773314918,   0.2367001549351,  0.09126773314918,   -0.146437105964,
+-            -0.1744758837006,-0.008489002638843,  0.09992448098266,  0.05456664642108,
+-            -0.009668203803637,-0.0003632289981419,   0.0125714831322, -0.02549732327631,
+-            -0.04913725230113,-0.008452993510474,  0.03610546808461,  0.02557664391618,
+-            -0.002843283124005,-0.0003563149319141, 0.007826845326762, -0.01190072307188,
+-            -0.02898308890566,-0.008381252202414,  0.02062068920473,  0.01747553870618,
+-            -0.0007167684326402,-0.0003448890509703, 0.006031624465459
++            0.09738513623999, 0, -0.19477027248, 0, 0.09738513623999
+     };
+     public static final double[] COFFS_NUM_OF_BAND_7 =  {
+-            0.01198100823448,-0.003268358623724, -0.01398214346754,-0.0005462428656256,
+-            0.01515281011823, 0.005076223603252, -0.01524483130827, -0.01016660613479,
+-            0.01401041852182,  0.01562464630208, -0.01119051246281, -0.02122928826543,
+-            0.006481325827823,  0.02674252122337, 0.000546337243949, -0.03192198190268,
+-            -0.01064457361028,  0.03653405965791,  0.02543039387013, -0.04036672047101,
+-            -0.04922797036847,  0.04324127532084,  0.09826406035481, -0.04502237706091,
+-            -0.3201203368008,   0.5535176707396,  -0.3201203368008, -0.04502237706091,
+-            0.09826406035481,  0.04324127532084, -0.04922797036847, -0.04036672047101,
+-            0.02543039387013,  0.03653405965791, -0.01064457361028, -0.03192198190268,
+-            0.000546337243949,  0.02674252122337, 0.006481325827823, -0.02122928826543,
+-            -0.01119051246281,  0.01562464630208,  0.01401041852182, -0.01016660613479,
+-            -0.01524483130827, 0.005076223603252,  0.01515281011823,-0.0005462428656256,
+-            -0.01398214346754,-0.003268358623724,  0.01198100823448
++            0.1232004759284,  -0.4928019037137,   0.7392028555706,  -0.4928019037137,
++            0.1232004759284
++    };
++    public static final double[] COFFS_DEN_OF_BAND_0 =  {
++            1,   -3.970583140324,    5.912181324726,    -3.91260952318,
++            0.9710113546044
++    };
++    public static final double[] COFFS_DEN_OF_BAND_1 =  {
++            1,    -3.96445386611,    5.894860431007,   -3.896343522739,
++            0.9659371572253
++    };
++    public static final double[] COFFS_DEN_OF_BAND_2 =  {
++            1,   -3.924517327016,    5.782289971391,   -3.790797644377,
++            0.9330346004599
++    };
++    public static final double[] COFFS_DEN_OF_BAND_3 =  {
++            1,   -3.831152847756,      5.5351307037,   -3.574300056685,
++            0.870553827421
++    };
++    public static final double[] COFFS_DEN_OF_BAND_4 =  {
++            1,   -3.594539970945,    4.968031260675,   -3.127142030978,
++            0.7578713111635
++    };
++    public static final double[] COFFS_DEN_OF_BAND_5 =  {
++            1,   -2.954385442351,    3.670246316227,   -2.226793779694,
++            0.5745521834423
++    };
++    public static final double[] COFFS_DEN_OF_BAND_6 =  {
++            1,   -1.260569303866,    1.361923962191,  -0.6901849308337,
++            0.3338721188764
++    };
++    public static final double[] COFFS_DEN_OF_BAND_7 =  {
++            1,  -0.3509025483246,   0.5249731165886, -0.07526342564919,
++            0.02006852429242
+     };
+ }
+Index: src/equalizer/Filter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package equalizer;\r\n\r\nimport java.util.concurrent.Callable;\r\n\r\npublic class Filter implements Callable<short[]> {\r\n    private short[] inputSignal;\r\n    private short[] outputSignal;\r\n    private double gain;\r\n    private double[] coffsNumFilter;\r\n\r\n    public void settings(final short[] inputSignal, final double[] coffsNumFilter) {\r\n        this.inputSignal = inputSignal;\r\n        this.coffsNumFilter = coffsNumFilter;\r\n        this.outputSignal = new short[inputSignal.length];\r\n    }\r\n\r\n    private void convolution() {\r\n        double tmp;\r\n        for(int i = 0; i <  this.inputSignal.length; i++) {\r\n            tmp = 0;\r\n            for(int j = 0; j < FilterInfo.COUNT_OF_COFFS; j++) {\r\n                if(i - j >= 0)\r\n                    tmp += coffsNumFilter[j] * this.inputSignal[i - j];\r\n            }\r\n            this.outputSignal[i] += this.gain * (short)(tmp / 4); //делим на 4, чтобы не было перегруза на пересечении фильтров\r\n        }\r\n    }\r\n\r\n    public void setGain(double gain) {\r\n        this.gain = gain;\r\n    }\r\n\r\n    @Override\r\n    public short[] call() {\r\n        this.convolution();\r\n        return this.outputSignal;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/equalizer/Filter.java b/src/equalizer/Filter.java
+--- a/src/equalizer/Filter.java	(revision 421319f1b7d6524892e987c269e53520021a6275)
++++ b/src/equalizer/Filter.java	(date 1681214352311)
+@@ -5,13 +5,17 @@
+ public class Filter implements Callable<short[]> {
+     private short[] inputSignal;
+     private short[] outputSignal;
++    private double[] feedbackSignal;
+     private double gain;
+     private double[] coffsNumFilter;
++    private double[] coffsDenFilter;
+ 
+-    public void settings(final short[] inputSignal, final double[] coffsNumFilter) {
++    public void settings(final short[] inputSignal, final double[] coffsNumFilter, final double[] coffsDenFilter) {
+         this.inputSignal = inputSignal;
+         this.coffsNumFilter = coffsNumFilter;
++        this.coffsDenFilter = coffsDenFilter;
+         this.outputSignal = new short[inputSignal.length];
++        this.feedbackSignal =  new double[inputSignal.length];
+     }
+ 
+     private void convolution() {
+@@ -19,9 +23,12 @@
+         for(int i = 0; i <  this.inputSignal.length; i++) {
+             tmp = 0;
+             for(int j = 0; j < FilterInfo.COUNT_OF_COFFS; j++) {
+-                if(i - j >= 0)
+-                    tmp += coffsNumFilter[j] * this.inputSignal[i - j];
++                if(i - j >= 0){
++                    tmp += this.coffsNumFilter[j] * this.inputSignal[i - j];
++                    tmp -= this.coffsDenFilter[j] * this.feedbackSignal[i - j];
++                }
+             }
++            this.feedbackSignal[i] = tmp;
+             this.outputSignal[i] += this.gain * (short)(tmp / 4); //делим на 4, чтобы не было перегруза на пересечении фильтров
+         }
+     }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5001d4d8-cc8a-4c09-9e09-71752947fddc\" name=\"Changes\" comment=\"application 5_FIR\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/GUI/FXMLDocument.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/GUI/FXMLDocument.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/GUI/FXMLDocumentController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/GUI/FXMLDocumentController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/equalizer/Filter.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/equalizer/Filter.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/equalizer/FilterInfo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/equalizer/FilterInfo.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/player/AudioPlayer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/player/AudioPlayer.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Mk4z641YR6Nag52vpgSvyUMQ2r\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/markn/IdeaProjects/Equalizer\",\r\n    \"project.structure.last.edited\": \"Libraries\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.20114942\",\r\n    \"settings.editor.selected.configurable\": \"project.propVCSSupport.DirectoryMappings\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\markn\\IdeaProjects\\Equalizer\\src\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"EqualizerApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"GUI.EqualizerApp\" />\r\n      <module name=\"Equalizer\" />\r\n      <option name=\"VM_PARAMETERS\" value=\"--module-path &quot;C:\\Users\\markn\\IdeaProjects\\SDK\\javafx-sdk-19.0.2.1\\lib&quot; --add-modules javafx.controls,javafx.fxml\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"GUI.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.EqualizerApp\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5001d4d8-cc8a-4c09-9e09-71752947fddc\" name=\"Changes\" comment=\"\" />\r\n      <created>1678298507539</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1678298507539</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"application 1\">\r\n      <created>1679927510478</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1679927510478</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"19eae371-56b8-4eab-94ca-125d2ab974d3\">\r\n          <value>\r\n            <State>\r\n              <option name=\"SHOW_ONLY_AFFECTED_CHANGES\" value=\"true\" />\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"roots\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"$PROJECT_DIR$\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"HEAD\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"OPEN_GENERIC_TABS\">\r\n      <map>\r\n        <entry key=\"19eae371-56b8-4eab-94ca-125d2ab974d3\" value=\"TOOL_WINDOW\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <ignored-roots>\r\n      <path value=\"$PROJECT_DIR$\" />\r\n    </ignored-roots>\r\n    <MESSAGE value=\"application 1\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"application 1\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 421319f1b7d6524892e987c269e53520021a6275)
++++ b/.idea/workspace.xml	(date 1681214365635)
+@@ -6,11 +6,12 @@
+   <component name="ChangeListManager">
+     <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application 5_FIR">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/equalizer/Equalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Equalizer.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/equalizer/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Filter.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/player/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/AudioPlayer.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -19,6 +20,7 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -33,7 +35,7 @@
+   "keyToString": {
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "last_opened_file_path": "C:/Users/markn/IdeaProjects/Equalizer",
++    "last_opened_file_path": "C:/Users/markn/Desktop/NIRS/Версии/Equalizer_app3_bih",
+     "project.structure.last.edited": "Libraries",
+     "project.structure.proportion": "0.15",
+     "project.structure.side.proportion": "0.20114942",
+@@ -82,7 +84,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1679927510478</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="application 5_FIR">
++      <created>1681211386253</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1681211386253</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -136,7 +145,8 @@
+       <path value="$PROJECT_DIR$" />
+     </ignored-roots>
+     <MESSAGE value="application 1" />
+-    <option name="LAST_COMMIT_MESSAGE" value="application 1" />
++    <MESSAGE value="application 5_FIR" />
++    <option name="LAST_COMMIT_MESSAGE" value="application 5_FIR" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />

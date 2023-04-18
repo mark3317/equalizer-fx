@@ -1,5 +1,7 @@
 package player;
 
+import effects.Chorus;
+import effects.Overdrive;
 import equalizer.Equalizer;
 import equalizer.Filter;
 
@@ -13,18 +15,26 @@ public class AudioPlayer {
     private final File currentMusicFile;
     private AudioInputStream audioStream;
     private SourceDataLine sourceDataLine;
-    public static final int BUFF_SIZE = 30000;
-    private final byte[] bufferBytes  = new byte[BUFF_SIZE];
+    public static final int BUFF_SIZE = 15000;
+    private final byte[] bufferBytes = new byte[BUFF_SIZE];
     private short[] bufferShort = new short[BUFF_SIZE / 2];
     private boolean pauseStatus;
     private boolean stopStatus;
     private double gain;
     private final Equalizer equalizer;
+    private final Chorus chorus;
+    private boolean isChorus;
+    private final Overdrive overdrive;
+    private boolean isOverdrive;
 
     public AudioPlayer(File musicFile) {
         this.currentMusicFile = musicFile;
         this.equalizer = new Equalizer();
         this.gain = 1.0;
+        this.isOverdrive = false;
+        this.overdrive = new Overdrive();
+        this.isChorus = false;
+        this.chorus = new Chorus();
     }
 
 
@@ -41,11 +51,17 @@ public class AudioPlayer {
             while ((this.audioStream.read(this.bufferBytes) != -1)) {
                 this.ByteArrayToShortArray();
 
-                if (this.pauseStatus)
-                    this.pause();
+                if (this.pauseStatus) this.pause();
 
-                if (this.stopStatus)
-                    break;
+                if (this.stopStatus) break;
+
+                if (this.isOverdrive) {
+                    this.overdrive(this.bufferShort);
+                }
+
+                if (this.isChorus) {
+                    this.chorus(this.bufferShort);
+                }
 
                 equalizer.setInputSignal(this.bufferShort);
                 this.equalizer.equalization();
@@ -56,8 +72,8 @@ public class AudioPlayer {
             }
             this.sourceDataLine.drain();
             this.sourceDataLine.close();
-        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException | ExecutionException |
+                 InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -87,19 +103,16 @@ public class AudioPlayer {
     }
 
     public void close() {
-        if (this.audioStream != null)
-            try {
-                this.audioStream.close();
-            } catch (IOException e) {
-            }
-        if (this.sourceDataLine != null)
-            this.sourceDataLine.close();
+        if (this.audioStream != null) try {
+            this.audioStream.close();
+        } catch (IOException e) {
+        }
+        if (this.sourceDataLine != null) this.sourceDataLine.close();
     }
 
     private void ByteArrayToShortArray() {
         for (int i = 0, j = 0; i < this.bufferBytes.length; i += 2, j++) {
-            this.bufferShort[j] = (short) ((ByteBuffer.wrap(this.bufferBytes, i, 2).order(
-                    java.nio.ByteOrder.LITTLE_ENDIAN).getShort() / 2) * this.gain);
+            this.bufferShort[j] = (short) ((ByteBuffer.wrap(this.bufferBytes, i, 2).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort() / 2) * this.gain);
         }
     }
 
@@ -116,6 +129,32 @@ public class AudioPlayer {
 
     public Equalizer getEqualizer() {
         return this.equalizer;
+    }
+
+    private void overdrive(short[] inputSamples) {
+        this.overdrive.setInputSampleStream(inputSamples);
+        this.overdrive.createEffect();
+    }
+
+    public boolean overdriveIsActive() {
+        return this.isOverdrive;
+    }
+
+    public void setOverdrive(boolean b) {
+        this.isOverdrive = b;
+    }
+
+    private void chorus(short[] inputSamples) throws ExecutionException, InterruptedException {
+        chorus.setInputSampleStream(inputSamples);
+        chorus.createEffect();
+    }
+
+    public boolean ChorusIsActive() {
+        return this.isChorus;
+    }
+
+    public void setChorus(boolean b) {
+        this.isChorus = b;
     }
 
 }

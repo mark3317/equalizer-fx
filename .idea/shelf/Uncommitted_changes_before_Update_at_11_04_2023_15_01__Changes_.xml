@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_11_04_2023_15_01_[Changes]" date="1681214471368" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_04_2023_15_01_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 11.04.2023 15:01 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Equalizer/equalizer/FilterInfo.class" />
+    <option name="AFTER_PATH" value="out/production/Equalizer/equalizer/FilterInfo.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_04_2023_15_01_[Changes]/FilterInfo.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Equalizer/equalizer/Equalizer.class" />
+    <option name="AFTER_PATH" value="out/production/Equalizer/equalizer/Equalizer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_04_2023_15_01_[Changes]/Equalizer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Equalizer/equalizer/Filter.class" />
+    <option name="AFTER_PATH" value="out/production/Equalizer/equalizer/Filter.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_04_2023_15_01_[Changes]/Filter.class" />
+  </binary>
+</changelist>

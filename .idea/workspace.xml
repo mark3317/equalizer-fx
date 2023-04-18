@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application 5_FIR">
+    <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application 5_IIR">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equalizer/Equalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Equalizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equalizer/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Filter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocument.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocumentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocumentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/player/AudioPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/player/AudioPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/player/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/player/AudioPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/markn/Desktop/NIRS/Версии/Equalizer_app3_bih",
+    "last_opened_file_path": "C:/Users/markn/IdeaProjects/Equalizer",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.20114942",
