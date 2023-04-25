@@ -17,14 +17,14 @@ public class Equalizer {
 
     public void setInputSignal(short[] inputSignal) {
         this.outputSignal = new short[inputSignal.length];
-        this.filters[0].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_0, FilterInfo.COFFS_DEN_OF_BAND_0);
-        this.filters[1].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_1, FilterInfo.COFFS_DEN_OF_BAND_1);
-        this.filters[2].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_2, FilterInfo.COFFS_DEN_OF_BAND_2);
-        this.filters[3].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_3, FilterInfo.COFFS_DEN_OF_BAND_3);
-        this.filters[4].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_4, FilterInfo.COFFS_DEN_OF_BAND_4);
-        this.filters[5].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_5, FilterInfo.COFFS_DEN_OF_BAND_5);
-        this.filters[6].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_6, FilterInfo.COFFS_DEN_OF_BAND_6);
-        this.filters[7].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_7, FilterInfo.COFFS_DEN_OF_BAND_7);
+        this.filters[0].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_0);
+        this.filters[1].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_1);
+        this.filters[2].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_2);
+        this.filters[3].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_3);
+        this.filters[4].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_4);
+        this.filters[5].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_5);
+        this.filters[6].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_6);
+        this.filters[7].settings(inputSignal, FilterInfo.COFFS_NUM_OF_BAND_7);
 
     }
 
