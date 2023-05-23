@@ -28,7 +28,6 @@ public class Equalizer {
 
     }
 
-
     private void createFilters() {
         this.filters = new  Filter [FilterInfo.COUNT_OF_BANDS] ;
         for (int i = 0; i < FilterInfo.COUNT_OF_BANDS; i++)
