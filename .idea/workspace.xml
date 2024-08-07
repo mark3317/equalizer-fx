@@ -4,57 +4,162 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="application f_FIR">
+    <list default="true" id="288bb03f-00a3-455b-b8f5-d920718bd043" name="Changes" comment="feat: build gradle, css стили">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/GUI/EqualizerApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/GUI/FXMLDocumentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/effects/BufferSamples.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/effects/Chorus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/effects/Delay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/effects/Effect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/effects/Overdrive.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/equalizer/Equalizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/equalizer/Filter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/equalizer/FilterInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/markn/equalizerfx/player/AudioPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ru/markn/equalizerfx/GUI/FXMLDocument.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ru/markn/equalizerfx/GUI/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equalizer/Equalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Equalizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equalizer/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/Filter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Equalizer.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/EqualizerApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocument.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/GUI/FXMLDocumentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/effects/BufferSamples.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/effects/Chorus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/effects/Delay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/effects/Effect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/effects/Overdrive.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Equalizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/Filter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/equalizer/FilterInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Equalizer/player/AudioPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EqualizerApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocument.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FXMLDocumentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/effects/BufferSamples.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/effects/Chorus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/effects/Delay.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/effects/Effect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/effects/Overdrive.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equalizer/Equalizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equalizer/Filter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/equalizer/FilterInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/player/AudioPlayer.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="EqualizerFX" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2Mk4z641YR6Nag52vpgSvyUMQ2r" />
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "mark3317"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mark3317/EqualizerFX.git&quot;,
+    &quot;accountId&quot;: &quot;9203d62a-6c77-4929-becf-7e0624bfa3e7&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2ZEStqH7GvoU3xL1luZDIJbLaww" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/markn/IdeaProjects/EqualizerMP",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.20114942",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.EqualizerFX [:EqualizerApp.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.EqualizerFX [:HelloApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Upgrade Gradle wrapper.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/markn/Projects/IdeaProjects/EqualizerFX/src/main/resources/ru/markn/equalizerfx/GUI&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.34827587&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;kotlin-gradle-user-dirs&quot;: [
+      &quot;/Users/markn/.gradle&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\markn\IdeaProjects\Equalizer\src" />
+      <recent name="$PROJECT_DIR$/src/main/resources/ru/markn/equalizerfx/GUI" />
+      <recent name="C:\Users\markn\YandexDisk\Projects\IdeaProjects\EqualizerFX\src\main\java\com\markn\equalizerfx" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/ru/markn/equalizerfx/GUI" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="C:\Users\markn\YandexDisk\Projects\IdeaProjects\EqualizerFX\src\main\resources\com\markn\equalizerfx\GUI" />
+      <recent name="C:\Users\markn\YandexDisk\Projects\IdeaProjects\EqualizerFX\src\main\java\com\markn\equalizerfx\GUI" />
+      <recent name="C:\Users\markn\YandexDisk\Projects\IdeaProjects\EqualizerFX\src\main\resources\com\markn\equalizerfx" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="EqualizerApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUI.EqualizerApp" />
-      <module name="Equalizer" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\markn\IdeaProjects\SDK\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+    <configuration name="EqualizerApp" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="ru.markn.equalizerfx.GUI.EqualizerApp" />
+      <module name="EqualizerFX.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GUI.*" />
+          <option name="PATTERN" value="ru.markn.equalizerfx.GUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -68,104 +173,51 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18968.26" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18968.26" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5001d4d8-cc8a-4c09-9e09-71752947fddc" name="Changes" comment="" />
-      <created>1678298507539</created>
+      <changelist id="288bb03f-00a3-455b-b8f5-d920718bd043" name="Changes" comment="" />
+      <created>1701985964179</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1678298507539</updated>
+      <updated>1701985964179</updated>
+      <workItem from="1705503480892" duration="907000" />
+      <workItem from="1712516711557" duration="618000" />
+      <workItem from="1712517999089" duration="805000" />
+      <workItem from="1712520133012" duration="1906000" />
+      <workItem from="1713773373484" duration="109000" />
+      <workItem from="1713780271508" duration="7000" />
+      <workItem from="1713781051056" duration="252000" />
+      <workItem from="1723002821586" duration="2396000" />
+      <workItem from="1723006447004" duration="23000" />
+      <workItem from="1723010833578" duration="383000" />
     </task>
-    <task id="LOCAL-00001" summary="application 1">
-      <created>1679927510478</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1679927510478</updated>
-    </task>
-    <task id="LOCAL-00002" summary="application 5_FIR">
-      <created>1681211386253</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1681211386253</updated>
-    </task>
-    <task id="LOCAL-00003" summary="application 6_IIR">
-      <created>1681814323642</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681814323642</updated>
-    </task>
-    <task id="LOCAL-00004" summary="application f_FIR">
-      <created>1684825443864</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1684825443864</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="19eae371-56b8-4eab-94ca-125d2ab974d3">
-          <value>
-            <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-              <option name="FILTERS">
-                <map>
-                  <entry key="roots">
-                    <value>
-                      <list>
-                        <option value="$PROJECT_DIR$" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
-      </map>
-    </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="19eae371-56b8-4eab-94ca-125d2ab974d3" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
-    <MESSAGE value="application 1" />
-    <MESSAGE value="application 5_FIR" />
-    <MESSAGE value="application 6_IIR" />
-    <MESSAGE value="application f_FIR" />
-    <option name="LAST_COMMIT_MESSAGE" value="application f_FIR" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="feat: build gradle, css стили" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: build gradle, css стили" />
   </component>
 </project>
